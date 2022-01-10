@@ -1,0 +1,94 @@
+﻿<Page x:Class="BitDesktopApplication.Views.AddCoordinatorView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BitDesktopApplication.Views"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      FontSize="15"
+      Title="AddCoordinatorView">
+
+    <Grid Margin="10">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+
+            <Grid >
+                <!--SideMargins-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <!--Middle stretch-->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="300"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                   
+                        <TextBlock FontSize="35" HorizontalAlignment="Left">Add New Coodinator</TextBlock>
+                    
+                    <!--form grid-->
+                    <Grid Margin="10" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"  Style="{StaticResource MainLabel}" Content="Title:*"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" x:Name="cmboTitle" ItemsSource="{Binding Titles}" DisplayMemberPath="TitleName"  Text="{Binding Coordinator.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="4"  ToolTip="{Binding Coordinator.ErrorCollection[Title]}">
+                        </ComboBox>
+                        <Label Grid.Row="1" Grid.Column="0"  Style="{StaticResource MainLabel}" Content="First Name:*"/>
+                        <TextBox Grid.Row="1" Grid.Column="1"  x:Name="txtFirstName" Text="{Binding Coordinator.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource MainTextBox}" ToolTip="{Binding Coordinator.ErrorCollection[FirstName]}"/>
+                        <Label Grid.Row="2" Grid.Column="0"  Style="{StaticResource MainLabel}" Content="Last Name:*"/>
+                        <TextBox Grid.Row="2" Grid.Column="1"  x:Name="txtLastName" Text="{Binding Coordinator.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  Style="{StaticResource MainTextBox}" ToolTip="{Binding Coordinator.ErrorCollection[LastName]}"/>
+                        <Label Grid.Row="3" Grid.Column="0"  Style="{StaticResource MainLabel}" Content="Mobile:"/>
+                        <TextBox Grid.Row="3" Grid.Column="1"  x:Name="txtMobile" Text="{Binding Coordinator.Mobile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource MainTextBox}" ToolTip="{Binding Coordinator.ErrorCollection[Mobile]}"/>
+                        <Label Grid.Row="4" Grid.Column="0"  Style="{StaticResource MainLabel}" Content="Home Phone:"/>
+                        <TextBox Grid.Row="4" Grid.Column="1"  Name="txtHomePhone" Text="{Binding Coordinator.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource MainTextBox}" ToolTip="{Binding Coordinator.ErrorCollection[Phone]}"/>
+                        <Label Grid.Row="5" Grid.Column="0"  Style="{StaticResource MainLabel}" Content="Email:*"/>
+                        <TextBox Grid.Row="5" Grid.Column="1"  x:Name="txtEmail" Style="{StaticResource MainTextBox}" Text="{Binding Coordinator.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="{Binding Coordinator.ErrorCollection[Email]}"/>
+
+                        <Label Grid.Row="0" Grid.Column="3"  Style="{StaticResource MainLabel}" Content="Date Of Birth:*"/>
+                        <DatePicker Grid.Row="0" Grid.Column="4"  x:Name="dtpkDob" SelectedDate="{Binding Coordinator.Dob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd MM yyyy', ValidatesOnDataErrors=True}" Style="{StaticResource MainDatePicker}" ToolTip="{Binding Coordinator.ErrorCollection[Dob]}"/>
+                        <Label Grid.Row="1" Grid.Column="3" Style="{StaticResource MainLabel}" Content="Street:*"/>
+                        <TextBox Grid.Row="1" Grid.Column="4"  x:Name="txtStreet" Text="{Binding Coordinator.Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource MainTextBox}" ToolTip="{Binding Coordinator.ErrorCollection[Street]}"/>
+                        <Label Grid.Row="2" Grid.Column="3" Style="{StaticResource MainLabel}" Content="Suburb:*"/>
+                        <TextBox Grid.Row="2" Grid.Column="4"  x:Name="txtSuburb" Text="{Binding Coordinator.Suburb, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource MainTextBox}" ToolTip="{Binding Coordinator.ErrorCollection[Suburb]}"/>
+                        <Label Grid.Row="3" Grid.Column="3" Style="{StaticResource MainLabel}" Content="State:*"/>
+                        <ComboBox Grid.Row="3" Grid.Column="4"  x:Name="cmboState" ItemsSource="{Binding States}" DisplayMemberPath="StateName" Text="{Binding Coordinator.State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="4" ToolTip="{Binding Coordinator.ErrorCollection[States]}"/>
+                        <Label Grid.Row="4" Grid.Column="3" Style="{StaticResource MainLabel}" Content="Postcode:*"/>
+                        <TextBox Grid.Row="4" Grid.Column="4"  x:Name="txtPostCode" Text="{Binding Coordinator.PostCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource MainTextBox}" ToolTip="{Binding Coordinator.ErrorCollection[PostCode]}"/>
+                        <Label Grid.Row="5" Grid.Column="3" Style="{StaticResource MainLabel}" Content="Country:*"/>
+                        <TextBox Grid.Row="5" Grid.Column="4"  x:Name="txtCountry" Text="{Binding Coordinator.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource MainTextBox}" ToolTip="{Binding Coordinator.ErrorCollection[Country]}"/>
+
+
+
+                    </Grid>
+
+                    <!--Botton Buttons-->
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" FlowDirection="RightToLeft" >
+                        <Button x:Name="btnAdd" Command="{Binding SaveCommand}" Content="Save"  Style="{StaticResource MainButtons}" Margin="10,0,10,0" VerticalAlignment="Center" Click="btnAdd_Click"  />
+                        <Button x:Name="btnCancel" Content="Cancel" Style="{StaticResource MainButtons}" Margin="10,0,10,0" VerticalAlignment="Center" Click="btnCancel_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

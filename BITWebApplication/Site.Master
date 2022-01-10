@@ -1,0 +1,82 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="BITWebApplication.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIT</title>
+    
+    <!-- custom CSS -->
+    <link href="CSS/GeneralStyleSheet.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- DataTable CSS -->
+    <link href="Datatables/css/jquery.dataTables.css" rel="stylesheet" />
+    <!-- FontAwesome CSS -->
+    <link href="FontAwesome/css/all.css" rel="stylesheet" />
+
+    <!-- JQuery Files -->
+    <script src="BootStrap/js/bootstrap.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server" >
+
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form runat="server" id="masterForm">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-dark nav1">
+                <a class="navbar-brand" href="HomePage.aspx">
+                    <img src="Logo_white.png" width="90" alt="Bit Logo" />
+                </a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <H3 class="text-white">BIT Technical Solutions</H3>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnContJobs" runat="server" OnClick="lbtnContJobs_Click" Visible="false">View Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnAssignedJobs" runat="server" OnClick="lbtnAssignedJobs_Click"  Visible="false">Assigned Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnClientJobs" runat="server" OnClick="lbtnClientJobs_Click"  Visible="false">View Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnAddJobs" runat="server" OnClick="lbtnAddJobs_Click"  Visible="false">Add Job</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnAssignJobs" runat="server" OnClick="lbtnAssignJobs_Click"  Visible="false">Assign Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnUnassignedJobs" runat="server" OnClick="lbtnUnassignedJobs_Click"  Visible="false">View Unassigned Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnCompletedJobs" runat="server" OnClick="lbtnCompletedJobs_Click"  Visible="false">Completed Jobs</asp:LinkButton>
+                        </li>
+                        <li class="nav-item active">
+                            <asp:LinkButton CssClass="nav-link" ID="lbtnLogIn" runat="server" OnClick="lbtnLogIn_Click" Visible="true">Log In</asp:LinkButton>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+        <hr />
+        <footer>
+            <center>
+                <p>&copy; <%: DateTime.Now.Year %> - BIT</p>
+            </center>
+        </footer>
+    </form>
+</body>
+</html>

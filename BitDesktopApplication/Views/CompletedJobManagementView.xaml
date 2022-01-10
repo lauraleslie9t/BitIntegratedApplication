@@ -1,0 +1,122 @@
+﻿<Page x:Class="BitDesktopApplication.Views.CompletedJobManagementView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BitDesktopApplication.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      FontSize="15"
+      Title="CompletedJobManagementView">
+
+    <Grid Margin="10">
+
+        <Grid >
+            <!--SideMargins-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <!--Middle stretch-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="350"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock FontSize="35" HorizontalAlignment="Left">Completed Jobs</TextBlock>
+                    <ComboBox x:Name="cmboSearch" Grid.Row="0" Grid.Column="1" Margin="10" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding SearchOption}" SelectionChanged="cmboSearch_SelectionChanged" >
+                        <ComboBoxItem Content="Job No"/>
+                        <ComboBoxItem Content="Job Date"/>
+                    </ComboBox>
+                    <DatePicker x:Name="dtpkrBirthDate" Margin="10" Height="40"  Grid.Row="0" Grid.Column="2"  Visibility="Hidden"  SelectedDate="{Binding SearchDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd MM yyyy'}"></DatePicker>
+                    <TextBox x:Name="txtSearch" Grid.Row="0" Grid.Column="2" Margin="10" Height="40" Style="{StaticResource MainTextBox}" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+                    <Button Name="btnSearch"  Grid.Row="0" Grid.Column="3" Content="Search" Style="{StaticResource MainButtons}" Command="{Binding SearchCommand}">
+                        <!--<fa:FontAwesome Icon="Search" Background="Transparent"/>-->
+                    </Button>
+                    <Button Name="btnClear"  Grid.Row="0" Grid.Column="5" Content="Clear" Style="{StaticResource MainButtons}" Click="btnClear_Click"  />
+                </Grid>
+                <DataGrid x:Name="dgCoordinators" ItemsSource="{Binding CompletedJobs}" SelectedItem="{Binding SelectedJob}" Grid.Row="1" Margin="0,0,0,10" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False">
+                    <!--j.jobNo, cl.clientId, cl.firstName, cl.lastName, a.date, requiredCompDate, j.jobDescription, j.kmTravelled, j.hoursTaken " +
+                        " FROM JOB j, CLIENT cl, JOB_LOCATION l, AVAILABILITY a-->
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Job No" Binding="{Binding JobNo}" />
+                        <DataGridTextColumn Header="Client ID" Binding="{Binding Client.ClientId}" />
+                        <DataGridTextColumn Header="Client First Name" Binding="{Binding Client.FirstName}" />
+                        <DataGridTextColumn Header="Client Last Name" Binding="{Binding Client.LastName}" />
+                        <DataGridTextColumn Header="Contractor ID" Binding="{Binding Contractor.StaffId}" />
+                        <DataGridTextColumn Header="Contractor First Name" Binding="{Binding Contractor.FirstName}" />
+                        <DataGridTextColumn Header="Contractor Last Name" Binding="{Binding Contractor.LastName}" />
+                        <DataGridTextColumn Header="Job Date" Binding="{Binding AvailabilityDate, StringFormat='dd/MM/yyyy'}"/>
+                        <DataGridTextColumn Header="Job Description" Binding="{Binding Description}" />
+                        <DataGridTextColumn Header="Km Travelled" Binding="{Binding KmTravelled}" />
+                        <DataGridTextColumn Header="Hours Taken" Binding="{Binding HoursTaken}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--form grid-->
+                <Grid Margin="10" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Job Id:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding SelectedJob.JobNo}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Client Id:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding SelectedJob.Client.ClientId}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Client First Name:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding SelectedJob.Client.FirstName}"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Client Last Name:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding SelectedJob.Client.LastName}"/>
+                    <Label Grid.Row="4" Grid.Column="0" Content="Contractor Id:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding SelectedJob.Contractor.StaffId}"/>
+                    <Label Grid.Row="5" Grid.Column="0" Content="Contractor First Name:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding SelectedJob.Contractor.FirstName}"/>
+                    <Label Grid.Row="6" Grid.Column="0" Content="Contractor Last Name:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource MainTextBox}" Text="{Binding SelectedJob.Contractor.LastName}"/>
+
+                    <Label Grid.Row="0" Grid.Column="3" Content="Job Date:" Style="{StaticResource MainLabel}"/>
+                    <DatePicker Grid.Row="0" Grid.Column="4" Margin="4" SelectedDate="{Binding SelectedJob.AvailabilityDate, StringFormat='dd MM yyyy'}"/>
+                    <Label Grid.Row="1" Grid.Column="3" Content="Km Travelled:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="1" Grid.Column="4" Style="{StaticResource MainTextBox}" Text="{Binding SelectedJob.KmTravelled}"/>
+                    <Label Grid.Row="2" Grid.Column="3" Content="Hours Worked:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="2" Grid.Column="4" Style="{StaticResource MainTextBox}" Text="{Binding SelectedJob.HoursTaken}"/>
+                    <Label Grid.Row="3" Grid.Column="3" Content="Job Description:" Style="{StaticResource MainLabel}"/>
+                    <TextBox Grid.Row="4" Grid.Column="3" Grid.RowSpan="3" Grid.ColumnSpan="2" Style="{StaticResource MainTextBox}" VerticalContentAlignment="Top" Text="{Binding SelectedJob.Description}"/>
+
+                </Grid>
+
+                <!--Botton Buttons-->
+                <StackPanel Grid.Row="3" Orientation="Horizontal" FlowDirection="RightToLeft" >
+                    <Button x:Name="btnComplete" Content="Mark Verified" Width="200" Style="{StaticResource MainButtons}" Margin="10,0,10,0" VerticalAlignment="Center" Command="{Binding MarkVerifiedCommand}"/>
+                    <Button x:Name="btnIncomplete" Content="Mark Incomplete" Width="200" Style="{StaticResource MainButtons}" Margin="10,0,10,0" VerticalAlignment="Center" Command="{Binding MarkIncompleteCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
